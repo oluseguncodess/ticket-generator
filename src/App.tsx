@@ -1,9 +1,12 @@
+import Hero from "./components/hero";
 import Homepage from "./pages/homepage";
 
 function App() {
   return (
     <>
-      <Homepage />
+      <Homepage>
+        <Hero/>
+      </Homepage>
     </>
   );
 }

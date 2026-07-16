@@ -1,1 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inconsolata', monospace;
+
+  --text-label: 1.25rem;
+
+  --color-neutral-0: hsl(0, 0%, 100%);
+  --color-neutral-300: hsl(252, 6%, 83%);
+  --color-neutral-500: hsl(245, 15%, 58%);
+  --color-neutral-700: hsl(245, 19%, 35%);
+  --color-neutral-900: hsl(248, 70%, 10%);
+
+  --color-orange-500: hsl(7, 88%, 67%);
+  --color-orange-700: hsl(7, 71%, 60%);
+
+  --color-gradient-start: hsl(7, 86%, 67%);
+  --color-gradient-end: hsl(0, 0%, 100%);
+}
+
+@layer base {
+  body {
+    @apply font-sans text-label
+  }
+
+  h1, h2 {
+    color: var(--color-neutral-0)
+  }
+
+  h3, h4, p, small {
+    color: var(--color-neutral-300)
+  }
+
+}

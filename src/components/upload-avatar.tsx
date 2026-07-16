@@ -1,10 +1,11 @@
 import { useState, useEffect, type ChangeEvent } from "react";
 import UploadIcon from "../assets/images/icon-upload.svg?react";
 import { Info } from "lucide-react";
+import { normalizeFile } from "../utils/previewImage";
 
 type FileSizeStatus = "error" | "success" | "unknown";
 
-const MAX_FILE_SIZE = 500 * 1024;
+const MAX_FILE_SIZE = 500 * 1024 + 10240;
 
 export default function UploadAvatar() {
   const [file, setFile] = useState<File | null>(null);
@@ -19,39 +20,33 @@ export default function UploadAvatar() {
     };
   }, [previewUrl]);
 
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+  async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files?.[0] ?? null;
+
     e.target.value = "";
 
-    if (!selected) {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl);
-      }
-      setFile(null);
-      setPreviewUrl(null);
-      setFileSize("unknown");
-      return;
-    }
+    if (!selected) return;
 
-    if (selected.size > MAX_FILE_SIZE) {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl);
+    try {
+      const normalized = await normalizeFile(selected);
+
+      if (normalized.size > MAX_FILE_SIZE) {
+        setFile(null);
+        setPreviewUrl(null);
+        setFileSize("error");
+        return;
       }
+
+      const url = URL.createObjectURL(normalized);
+
+      setFile(normalized);
+      setPreviewUrl(url);
+      setFileSize("success");
+    } catch {
       setFile(null);
       setPreviewUrl(null);
       setFileSize("error");
-      return;
     }
-
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
-    }
-    
-    const objectUrl = URL.createObjectURL(selected);
-
-    setFile(selected);
-    setPreviewUrl(objectUrl);
-    setFileSize("success");
   }
 
   return (
@@ -60,7 +55,7 @@ export default function UploadAvatar() {
         type="file"
         className="sr-only"
         id="avatar-upload"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp"
         onChange={handleOnChange}
       />
 

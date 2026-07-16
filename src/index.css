@@ -24,4 +24,13 @@
   body {
     @apply font-sans text-label
   }
+
+  h1, h2 {
+    color: var(--color-neutral-0)
+  }
+
+  h3, h4, p, small {
+    color: var(--color-neutral-300)
+  }
+
 }

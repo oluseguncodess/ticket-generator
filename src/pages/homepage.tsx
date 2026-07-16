@@ -12,7 +12,7 @@ export default function Homepage({ children }: PropsWithChildren) {
         />
       </picture>
 
-      <div className="flex flex-col min-h-screen w-full">{children}</div>
+      <div className="flex flex-col min-h-screen w-full px-4 pt-5 items-center">{children}</div>
     </section>
   );
 }

@@ -29,7 +29,7 @@ export default function Input({
 
       {prefix ? (
         <span
-          className="pl-3 select-none absolute top-13 text-neutral-500"
+          className="pl-3 select-none absolute top-14.5 text-neutral-500 text-base md:text-xl md:top-13.5"
           aria-hidden="true"
         >
           {prefix}
@@ -39,7 +39,7 @@ export default function Input({
       <input
         type={type}
         id={id}
-        className={`p-3 rounded-2xl text-neutral-300 border-2 border-neutral-0/25 bg-neutral-700/30 focus:outline-neutral-700 focus:outline-offset-4 autofill:shadow-[0_0_0_1000px_white_inset] ${prefix && "pl-5 lowercase"}`}
+        className={`p-3 rounded-2xl placeholder:text-base md:placeholder:text-xl text-base md:text-xl text-neutral-300 border-2 border-neutral-0/25 bg-neutral-700/30 focus:outline-neutral-700 focus:outline-offset-4 autofill:shadow-[0_0_0_1000px_white_inset] ${prefix && "pl-5 lowercase"}`}
         name={name}
         onChange={handleOnChange}
         value={value}

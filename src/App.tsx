@@ -1,18 +1,22 @@
-import Form from "./components/form";
-import Hero from "./components/hero";
-import UploadAvatar from "./components/upload-avatar";
+import RootLayout from "./layouts/root-layout";
 import Homepage from "./pages/homepage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <Homepage />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <Homepage>
-        <Hero/>
-        <UploadAvatar/>
-        <Form/>
-      </Homepage>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

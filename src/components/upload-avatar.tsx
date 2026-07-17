@@ -1,58 +1,10 @@
-import { useState, useEffect, type ChangeEvent } from "react";
 import UploadIcon from "../assets/images/icon-upload.svg?react";
 import { Info } from "lucide-react";
-import { normalizeFile } from "../utils/previewImage";
-
-type FileSizeStatus = "error" | "success" | "unknown";
-
-const MAX_FILE_SIZE = 500 * 1024 + 10240;
+import { useUserContext } from "../contexts/use-context";
 
 export default function UploadAvatar() {
-  const [file, setFile] = useState<File | null>(null);
-  const [fileSize, setFileSize] = useState<FileSizeStatus>("unknown");
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl);
-      }
-    };
-  }, [previewUrl]);
-
-  async function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    const selected = e.target.files?.[0] ?? null;
-
-    e.target.value = "";
-
-    if (!selected) return;
-
-    try {
-      const normalized = await normalizeFile(selected);
-
-      if (normalized.size > MAX_FILE_SIZE) {
-        setFile(null);
-        setPreviewUrl(null);
-        setFileSize("error");
-        return;
-      }
-
-      const url = URL.createObjectURL(normalized);
-
-      setFile(normalized);
-      setPreviewUrl(url);
-      setFileSize("success");
-    } catch {
-      setFile(null);
-      setPreviewUrl(null);
-      setFileSize("error");
-    }
-  }
-
-  function handleRemoveFile() {
-    setFile(null);
-    setPreviewUrl(null);
-  }
+  const { file, fileSize, previewUrl, handleFileByOnchange, handleRemoveFile } =
+    useUserContext();
 
   const buttonCssStyles = `py-1 px-2 flex justify-center items-center bg-neutral-700/50 text-neutral-300 rounded-[5px] text-[0.8rem]`;
 
@@ -63,7 +15,7 @@ export default function UploadAvatar() {
         className="sr-only"
         id="avatar-upload"
         accept="image/jpeg,image/png,image/webp"
-        onChange={handleOnChange}
+        onChange={handleFileByOnchange}
       />
 
       <h2 className="font-bold">Upload Avatar</h2>
@@ -96,11 +48,13 @@ export default function UploadAvatar() {
               Remove image
             </button>
             <div className={`${buttonCssStyles}`}>
-              <label htmlFor="change-image" className="cursor-pointer">Change image</label>
+              <label htmlFor="change-image" className="cursor-pointer">
+                Change image
+              </label>
               <input
                 type="file"
                 className="sr-only"
-                onChange={handleOnChange}
+                onChange={handleFileByOnchange}
                 id="change-image"
                 accept="image/jpeg,image/png,image/webp"
               />

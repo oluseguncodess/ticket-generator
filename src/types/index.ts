@@ -6,12 +6,18 @@ export type FormType = {
   username: string;
 };
 
-export type UrlType = string | null
+export type UrlType = string | null;
+
+export type FileSizeStatus = "error" | "success" | "unknown";
+
+export type FileType = File | null;
 
 export type UserContextState = {
-    userData: FormType;
-    previewUrl: UrlType;
-    handleOnChangeUserData: (e: ChangeEvent<HTMLInputElement>) => void;
-    getPreviewUrl: (url: UrlType) => void
-}
-
+  userData: FormType;
+  previewUrl: UrlType;
+  file: FileType;
+  fileSize: FileSizeStatus;
+  handleFileByOnchange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleRemoveFile: () => void;
+  handleOnChangeUserData: (e: ChangeEvent<HTMLInputElement>) => void;
+};

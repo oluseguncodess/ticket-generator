@@ -1,27 +1,10 @@
-import { useState, type ChangeEvent } from "react";
+import { useUserContext } from "../contexts/use-context";
 import { inputFields } from "../data/inputFields";
+import type { FormType } from "../types";
 import Input from "./Input";
 
-type FormType = {
-  fullName: string;
-  email: string;
-  username: string;
-};
-
-const initialFormState: FormType = {
-  fullName: "",
-  email: "",
-  username: "",
-};
-
 export default function Form() {
-  const [userData, setUserData] = useState<FormType>(initialFormState);
-
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-
-    setUserData((prev) => ({ ...prev, [name]: value }));
-  }
+const {userData, handleOnChangeUserData} = useUserContext()  
   return (
     <form className="flex flex-col w-full md:max-w-125 mt-7 md:mt-8 gap-6 mb-40">
       {inputFields.map((input) => (
@@ -31,7 +14,7 @@ export default function Form() {
           label={input.label}
           name={input.name}
           type={input.type}
-          handleOnChange={handleOnChange}
+          handleOnChange={handleOnChangeUserData}
           value={userData[input.name as keyof FormType] ?? ""}
           prefix={input.name === "username" ? "@" : ""}
           placeholder={input.placeholder}

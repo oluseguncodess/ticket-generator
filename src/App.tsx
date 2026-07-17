@@ -1,3 +1,4 @@
+import UserContextProvider from "./contexts/context-provider";
 import RootLayout from "./layouts/root-layout";
 import Homepage from "./pages/homepage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
+  );
 }
 
 export default App;

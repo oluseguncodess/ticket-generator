@@ -1,3 +1,4 @@
+import Confirmation from "./components/confirmation";
 import UserContextProvider from "./contexts/context-provider";
 import RootLayout from "./layouts/root-layout";
 import Homepage from "./pages/homepage";
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />,
+      },
+      {
+        path: "/confirmation",
+        element: <Confirmation />,
       },
     ],
   },

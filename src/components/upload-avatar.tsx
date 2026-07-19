@@ -6,7 +6,7 @@ export default function UploadAvatar() {
   const { file, fileSize, previewUrl, handleFileByOnchange, handleRemoveFile } =
     useUserContext();
 
-  const buttonCssStyles = `py-1 px-2 flex justify-center items-center bg-neutral-700/50 text-neutral-300 rounded-[5px] text-[0.8rem]`;
+  const buttonCssStyles = `py-1 px-2 flex justify-center items-center bg-neutral-700/50 text-neutral-300 rounded-[5px] text-[0.8rem] z-10`;
 
   return (
     <div className="flex flex-col gap-4 mt-10 md:mt-13 w-full md:max-w-125 relative">

@@ -27,5 +27,5 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
   },
-  "include": ["src"]
+  "include": ["src", "src/layouts/root-layout.tsx"]
 }

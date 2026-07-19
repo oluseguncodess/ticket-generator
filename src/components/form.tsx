@@ -2,11 +2,13 @@ import { useUserContext } from "../contexts/use-context";
 import { inputFields } from "../data/inputFields";
 import type { FormType } from "../types";
 import Input from "./Input";
+import PatternCircle from "../assets/images/pattern-circle.svg?react";
 
 export default function Form() {
-const {userData, handleOnChangeUserData} = useUserContext()  
+  const { userData, handleOnChangeUserData } = useUserContext();
   return (
-    <form className="flex flex-col w-full md:max-w-125 mt-7 md:mt-8 gap-6 mb-40">
+    <form className="flex flex-col w-full md:max-w-125 mt-7 md:mt-8 gap-6 mb-30 z-10 relative">
+      <PatternCircle className="absolute w-30 -right-15 top-15 md:w-55 md:-top-8 md:-right-50" />
       {inputFields.map((input) => (
         <Input
           key={input.id}

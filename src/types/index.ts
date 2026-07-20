@@ -19,5 +19,5 @@ export type UserContextState = {
   fileSize: FileSizeStatus;
   handleFileByOnchange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleRemoveFile: () => void;
-  handleOnChangeUserData: (e: ChangeEvent<HTMLInputElement>) => void;
+  storeUserData: (data: FormType) => void;
 };

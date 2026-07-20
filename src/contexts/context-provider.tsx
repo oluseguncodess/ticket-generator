@@ -35,11 +35,9 @@ export default function UserContextProvider({ children }: PropsWithChildren) {
     };
   }, [previewUrl]);
 
-  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-
-    setUserData((prev) => ({ ...prev, [name]: value }));
-  }
+ function storeUserData(data: FormType) {
+  setUserData(data)
+ }
 
   async function handleFileOnChange(e: ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files?.[0] ?? null;
@@ -82,7 +80,7 @@ export default function UserContextProvider({ children }: PropsWithChildren) {
     fileSize,
     handleFileByOnchange: handleFileOnChange,
     handleRemoveFile,
-    handleOnChangeUserData: handleOnChange,
+    storeUserData
   };
 
   return <UserContext value={ctxValue}>{children}</UserContext>;

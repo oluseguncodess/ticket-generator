@@ -1,11 +1,24 @@
-import { useUserContext } from "../contexts/use-context";
 import { inputFields } from "../data/inputFields";
 import type { FormType } from "../types";
 import Input from "./Input";
 import PatternCircle from "../assets/images/pattern-circle.svg?react";
+import { useState, type ChangeEvent } from "react";
+
+const initialFormState: FormType = {
+  fullName: "",
+  email: "",
+  username: "",
+};
 
 export default function Form() {
-  const { userData, handleOnChangeUserData } = useUserContext();
+  const [userDetails, setUserDetails] = useState<FormType>(initialFormState);
+
+  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setUserDetails((prev) => ({ ...prev, [name]: value }));
+  }
+
   return (
     <form className="flex flex-col w-full md:max-w-125 mt-7 md:mt-8 gap-6 mb-30 z-10 relative">
       <PatternCircle className="absolute w-30 -right-15 top-15 md:w-55 md:-top-8 md:-right-50" />
@@ -16,8 +29,8 @@ export default function Form() {
           label={input.label}
           name={input.name}
           type={input.type}
-          handleOnChange={handleOnChangeUserData}
-          value={userData[input.name as keyof FormType] ?? ""}
+          handleOnChange={handleOnChange}
+          value={userDetails[input.name as keyof FormType] ?? ""}
           prefix={input.name === "username" ? "@" : ""}
           placeholder={input.placeholder}
         />

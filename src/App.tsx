@@ -1,4 +1,4 @@
-import Confirmation from "./components/confirmation";
+import Confirmation from "./pages/confirmation";
 import UserContextProvider from "./contexts/context-provider";
 import RootLayout from "./layouts/root-layout";
 import Homepage from "./pages/homepage";

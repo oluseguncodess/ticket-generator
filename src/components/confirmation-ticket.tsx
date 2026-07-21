@@ -16,7 +16,9 @@ export default function Ticket() {
           <ConferenceDetails />
           <UserDetails />
         </div>
-        <span className="self-center rotate-90 text-neutral-500 pb-6 md:text-3xl">#01609</span>
+        <span className="self-center rotate-90 text-neutral-500 pb-6 md:text-3xl">
+          #01609
+        </span>
       </div>
     </div>
   );
